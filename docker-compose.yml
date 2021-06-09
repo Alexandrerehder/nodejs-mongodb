@@ -1,0 +1,41 @@
+version: "3.2"
+services:
+  db:
+    image: mongo:4.2
+    container_name: db
+    restart: always
+    networks:
+      - rede
+    ports:
+      - ${DB_PORT}:27017
+    environment:
+      MONGO_INITDB_DATABASE: ${DB_NAME}
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASS}
+
+  api:
+    image: node:latest
+    container_name: api
+    restart: always
+    env_file:
+     - .env
+    depends_on:
+      - db
+    networks:
+      - rede  
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    command: yarn start 
+    logging:                #Configuração de logs
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+networks:
+  rede:
+    name: nome_rede
+    driver: bridge
