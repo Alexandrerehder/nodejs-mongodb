@@ -11,7 +11,7 @@ CRUD utilizando Commander em Node.JS com base no conteúdo asimilado durante o t
 
 ## Modo de uso
 ``` shell
-git clone git@github.com:Alexandrerehder/nodejs-mongodb.git && cd nodejs-mongodb
+git clone git@github.com:alexandrerehder/nodejs-mongodb.git && cd nodejs-mongodb
 
 npm init && npm install esm mongoose pm2 restify dotenv nodemon
 
